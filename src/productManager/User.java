@@ -8,34 +8,37 @@ import productFile.ProductFile;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Admin implements ProductManager,Editor {
-    private ArrayList<Product> list=new ArrayList<>();
+public class Admin implements ProductManager, Editor {
+
+    private ArrayList<Product> list = new ArrayList<>();
     private ProductFile productFile;
     private ProductTypeChecking productTypeChecking;
 
-    public Admin(){
-        productFile=new ProductFile();
-        list=productFile.readFromFileAdmin();
+    public Admin() {
+        productFile = new ProductFile();
+        list = productFile.readFromFileAdmin();
     }
 
     @Override
     public void edit(String id) {
-        for (int i=0;i<list.size();i++){
-            if (list.get(i).getProductCode().equals(id)){
-                if (productTypeChecking.isTV(list.get(i))){
-                    TV newTV=(TV) list.get(i);
-                    Scanner scanner=new Scanner(System.in);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getProductCode().equals(id)) {
+                if (productTypeChecking.isTV(list.get(i))) {
+                    TV newTV = (TV) list.get(i);
+                    Scanner scanner = new Scanner(System.in);
                     System.out.println("enter productName:");
-                    String newName=scanner.next();
+                    String newName = scanner.next();
                     newTV.setName(newName);
+
                     System.out.println("enter price:");
-                    int newPrice=scanner.nextInt();
+                    int newPrice = scanner.nextInt();
                     newTV.setPrice(newPrice);
+
                     System.out.println("enter code id :");
-                    String newProductCode=scanner.next();
+                    String newProductCode = scanner.next();
                     newTV.setProductCode(newProductCode);
                     System.out.println("enter inch:");
-                    double newInch=scanner.nextDouble();
+                    double newInch = scanner.nextDouble();
                     newTV.setInch(newInch);
                 }
             }
@@ -50,8 +53,8 @@ public class Admin implements ProductManager,Editor {
     @Override
     public void delete(String id) {
 
-        for (int i=0;i<list.size();i++){
-            if (list.get(i).getProductCode().equals(id)){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getProductCode().equals(id)) {
                 list.remove(i);
             }
         }
@@ -59,14 +62,15 @@ public class Admin implements ProductManager,Editor {
 
     @Override
     public void display() {
-        for (int i=0;i<list.size();i++ ){
-            if (productTypeChecking.isTV(list.get(i))){
+        for (int i = 0; i < list.size(); i++) {
+            if (productTypeChecking.isTV(list.get(i))) {
                 System.out.println(list.get(i).toString());
             }
             System.out.println(list.get(i).toString());
         }
     }
-    public boolean isAdmin(String account,String password){
+
+    public boolean isAdmin(String account, String password) {
         return (account.equals("vanhuan") && password.equals("vanhuan"));
     }
 }
