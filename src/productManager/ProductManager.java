@@ -3,8 +3,8 @@ package productManager;
 import product.Product;
 
 public interface ProductManager {
-    void add(String desFile);
-    void delete(int id);
+    void add(Product newProduct);
+    void delete(String id);
     void display();
 
 }

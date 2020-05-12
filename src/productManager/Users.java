@@ -15,15 +15,13 @@ public class Users implements ProductManager {
         productFile=new ProductFile();
     }
 
-
-
     @Override
-    public void add(String desFile) {
+    public void add(Product newProduct) {
 
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(String id) {
 
     }
 

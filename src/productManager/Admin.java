@@ -11,64 +11,62 @@ import java.util.Scanner;
 public class Admin implements ProductManager,Editor {
     private ArrayList<Product> list=new ArrayList<>();
     private ProductFile productFile;
+    private ProductTypeChecking productTypeChecking;
 
     public Admin(){
         productFile=new ProductFile();
+        list=productFile.readFromFileAdmin();
     }
 
     @Override
     public void edit(String id) {
-
-    }
-
-    @Override
-    public void add(String destFile) {
-        list=productFile.readFromFileAdmin();
-        System.out.println("ban muốn thêm sản phẩm j vào cửa  hàng?");
-        System.out.println("1.TV");
-        System.out.println("1.điều hòa");
-        Scanner scanner=new Scanner(System.in);
-        int choice=scanner.nextInt();
-        switch (choice){
-            case 1:
-                System.out.println("nhập tên ");
-                String newName=scanner.next();
-                System.out.println("nhập giá ");
-                int newPrice=scanner.nextInt();
-                System.out.println("nhập code của sản phẩm ");
-                String newProductCode=scanner.next();
-                System.out.println("nhập inch ");
-                double newInch=scanner.nextDouble();
-                Product newTV=new TV(newName,newPrice,newProductCode,newInch);
-                list.add(newTV);
-                productFile.writeIntoFileAdmin(list);
-                break;
-            case 2:
-                System.out.println("nhập tên ");
-                String newName1=scanner.next();
-                System.out.println("nhập giá ");
-                int newPrice1=scanner.nextInt();
-                System.out.println("nhập code của sản phẩm ");
-                String newProductCode1=scanner.next();
-
-                System.out.println("điểu hòa mấy chiểu? ");
-                String newWay=scanner.next();
-                Product newAirConditioner=new AirConditioner(newName1,newPrice1,newProductCode1,newWay);
-                list.add(newAirConditioner);
-                productFile.writeIntoFileAdmin(list);
-                break;
-            default:
-                System.out.println("không hợp lệ");
+        for (int i=0;i<list.size();i++){
+            if (list.get(i).getProductCode().equals(id)){
+                if (productTypeChecking.isTV(list.get(i))){
+                    TV newTV=(TV) list.get(i);
+                    Scanner scanner=new Scanner(System.in);
+                    System.out.println("enter productName:");
+                    String newName=scanner.next();
+                    newTV.setName(newName);
+                    System.out.println("enter price:");
+                    int newPrice=scanner.nextInt();
+                    newTV.setPrice(newPrice);
+                    System.out.println("enter code id :");
+                    String newProductCode=scanner.next();
+                    newTV.setProductCode(newProductCode);
+                    System.out.println("enter inch:");
+                    double newInch=scanner.nextDouble();
+                    newTV.setInch(newInch);
+                }
+            }
         }
     }
 
     @Override
-    public void delete(int id) {
+    public void add(Product newProduct) {
+        list.add(newProduct);
+    }
 
+    @Override
+    public void delete(String id) {
+
+        for (int i=0;i<list.size();i++){
+            if (list.get(i).getProductCode().equals(id)){
+                list.remove(i);
+            }
+        }
     }
 
     @Override
     public void display() {
-
+        for (int i=0;i<list.size();i++ ){
+            if (productTypeChecking.isTV(list.get(i))){
+                System.out.println(list.get(i).toString());
+            }
+            System.out.println(list.get(i).toString());
+        }
+    }
+    public boolean isAdmin(String account,String password){
+        return (account.equals("vanhuan") && password.equals("vanhuan"));
     }
 }
