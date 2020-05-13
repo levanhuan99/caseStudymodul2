@@ -107,6 +107,9 @@ public class Service implements AdminCreation, Customer1Creation {
                     int customerOption=scanner.nextInt();
                     switch (customerOption){
                         case 1:
+                            System.out.println("what product you want to add to your cart?");
+                            list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
+                            customer.display(list);
                             break;
                         case 2:
                             list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
