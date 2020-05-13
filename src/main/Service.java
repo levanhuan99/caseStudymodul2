@@ -1,6 +1,7 @@
 package main;
 
 import product.Product;
+import product.productList.AirConditioner;
 import product.productList.TV;
 import productFile.ProductFile;
 import productManager.User;
@@ -29,7 +30,6 @@ public class Service implements AdminCreation, Customer1Creation {
                 System.out.println("enter password");
                 String adminPassword = scanner.next();
 
-
                 if (isUser(adminAccount, adminPassword, admin)) {
                     System.out.println("what do you want to do ?");
                     System.out.println("1.add product");
@@ -55,22 +55,45 @@ public class Service implements AdminCreation, Customer1Creation {
                                     int newInch = scanner.nextInt();
                                     Product newTV = new TV(newName, newPrice, newCode, newInch);
                                     admin.add(newTV, list);
+                                    productFile.writeIntoFile(list, "D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
+                                    run();
                                     break;
                                 case 2:
+                                    System.out.println("enter product name");
+                                    String newName1 = scanner.next();
+                                    System.out.println("enter product price");
+                                    int newPrice1 = scanner.nextInt();
+                                    System.out.println("enter product code");
+                                    String newCode1 = scanner.next();
+                                    System.out.println("hom many way of this air conditioner");
+                                    String newWay1 = scanner.next();
+                                    Product newAirConditioner = new AirConditioner(newName1, newPrice1, newCode1, newWay1);
+                                    admin.add(newAirConditioner, list);
+                                    productFile.writeIntoFile(list, "D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
+                                    run();
                                     break;
-                                default:
+
                             }
                         case 2:
+                            System.out.println("enter product code ");      //ok
+                            String codeDelete = scanner.next();
+                            admin.delete(codeDelete, list);
+                            productFile.writeIntoFile(list, "D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
+                            run();
                             break;
                         case 3:
+                            System.out.println("enter product code");       //ok
+                            String codeEdit = scanner.next();
+                            admin.edit(codeEdit, list);
+                            productFile.writeIntoFile(list, "D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
+                            run();
                             break;
                         case 4:
-                            admin.display(list);
+                            admin.display(list);                            //ok
+                            run();
                             break;
-                        default:
-
-                     productFile.writeIntoFile(list,"D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
                     }
+
                 }
             case 2://customer
                 break;
