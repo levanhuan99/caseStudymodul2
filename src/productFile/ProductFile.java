@@ -1,52 +1,44 @@
 package productFile;
 
 import product.Product;
+import product.productList.TV;
+import productManager.ProductTypeChecking;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class ProductFile {
+    private  ProductTypeChecking productTypeChecking=new ProductTypeChecking();
 
-    private static final String SOURCE_FILE_ADMIN ="D:\\codegym\\modul2\\caseStudy\\project\\src\\productFile\\products" ;
 
-    public ArrayList<Product> readFromFileAdmin() {
-        ArrayList<Product> store = new ArrayList<>();
-
+    public ArrayList<Product> readFile(String path) {
+        ArrayList<Product> store=new ArrayList<>();
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         Object obj = null;
         try {
-            fis = new FileInputStream(SOURCE_FILE_ADMIN);
+            fis = new FileInputStream(path);
             ois = new ObjectInputStream(fis);
 
             while (fis.available() > 0) {
                 obj = ois.readObject();
                 store.add((Product) obj);
             }
+            fis.close();
+            ois.close();
             return store;
         } catch (Exception e) {
             System.out.println("loi o doc file " + e);
-        } finally {
-            try {
-                fis.close();
-            } catch (IOException e) {
-                System.out.println("loi o class product io doc file try catch 2 " + e);
-            }
-            try {
-                ois.close();
-            } catch (IOException e) {
-                System.out.println("loi o class product io try catch 2 " + e);
-            }
         }
         return null;
     }
 
-    public void writeIntoFileAdmin(ArrayList<Product> list) {
+    public void writeIntoFile(ArrayList<Product> list, String path) throws IOException {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         Object obj = null;
         try {
-            fos = new FileOutputStream(SOURCE_FILE_ADMIN);
+            fos = new FileOutputStream(path);
             oos = new ObjectOutputStream(fos);
             for (int i = 0; i < list.size(); i++) {
                 obj = list.get(i);
@@ -55,41 +47,8 @@ public class ProductFile {
         } catch (Exception e) {
             System.out.println("loi o ghi file " + e);
         } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                System.out.println("loi o class product io ghi file try catch 2 " + e);
-            }
-            try {
-                oos.close();
-            } catch (IOException e) {
-                System.out.println("loi o class product io ghi file try catch 2 " + e);
-            }
+            fos.close();
+            oos.close();
         }
     }
-    public void readFromFileUser(String SOURCE_FILE_USER) throws IOException {//trả về ArrayList<Product>
-//        BufferedReader bufferedReader = null;
-////        String line="";
-//        FileReader fileReader = null;
-//        String[] countries;
-//
-//
-//        try {
-//            fileReader = new FileReader(SOURCE_FILE_USER);
-//            bufferedReader = new BufferedReader(fileReader);
-//            while ((bufferedReader.readLine()) != null) {
-//                countries = bufferedReader.readLine().split(",");
-//                System.out.println(countries);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            bufferedReader.close();
-//        }
-
-
-    }
-    public void writeIntoFileUser(ArrayList<Product> list){
-    }
-
 }

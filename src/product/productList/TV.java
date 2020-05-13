@@ -2,10 +2,12 @@ package product.productList;
 
 import product.Product;
 
-public class TV extends Product {
-    private double inch;
+import java.io.Serializable;
 
-    public TV(String name, int price, String productCode,double inch) {
+public class TV extends Product implements Serializable {
+    private int inch;
+
+    public TV(String name, int price, String productCode,int inch) {
         super(name, price, productCode);
         this.inch=inch;
     }
@@ -40,11 +42,11 @@ public class TV extends Product {
         super.setProductCode(productCode);
     }
 
-    public double getInch() {
+    public int getInch() {
         return inch;
     }
 
-    public void setInch(double inch) {
+    public void setInch(int inch) {
         this.inch = inch;
     }
 

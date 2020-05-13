@@ -2,7 +2,9 @@ package product.productList;
 
 import product.Product;
 
-public class AirConditioner extends Product {
+import java.io.Serializable;
+
+public class AirConditioner extends Product implements Serializable {
     private String way;
 
     public AirConditioner(String name, int price, String productCode,String way) {
@@ -50,6 +52,7 @@ public class AirConditioner extends Product {
 
     @Override
     public String toString() {
-        return super.toString()+",this is air conditioner "+getWay()+" way";
+        return super.toString()+",this is " +getWay() +" air conditioner ";
     }
+
 }
