@@ -93,9 +93,36 @@ public class Service implements AdminCreation, Customer1Creation {
                             run();
                             break;
                     }
-
                 }
             case 2://customer
+                System.out.println("enter account");
+                String customerAccount = scanner.next();
+                System.out.println("enter password");
+                String customerPassword = scanner.next();
+                if (isUser(customerAccount,customerPassword,customer)){
+                    System.out.println("what do you want to do ?");
+                    System.out.println("1.add product to your cart");
+                    System.out.println("2.delete product from your cart");
+                    System.out.println("3.display all the product in your cart");
+                    int customerOption=scanner.nextInt();
+                    switch (customerOption){
+                        case 1:
+                            break;
+                        case 2:
+                            list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
+                            System.out.println("enter product code ");
+                            String codeDelete = scanner.next();
+                            customer.delete(codeDelete,list);
+                            productFile.writeIntoFile(list,"D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
+                            run();
+                            break;
+                        case 3:
+                            list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser"); //ok
+                            customer.display(list);
+                            run();
+                            break;
+                    }
+                }
                 break;
         }
     }
