@@ -20,6 +20,8 @@ public class Service implements AdminCreation, Customer1Creation {
         System.out.println("who are you?");
         System.out.println("1.admin");
         System.out.println("2.customer");
+        System.out.println("3.sign up an account");
+        System.out.println("4.exit");
         int userOption = scanner.nextInt();
         switch (userOption) {
 
@@ -72,7 +74,6 @@ public class Service implements AdminCreation, Customer1Creation {
                                     productFile.writeIntoFile(list, "D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
                                     run();
                                     break;
-
                             }
                         case 2:
                             System.out.println("enter product code ");      //ok
@@ -99,40 +100,56 @@ public class Service implements AdminCreation, Customer1Creation {
                 String customerAccount = scanner.next();
                 System.out.println("enter password");
                 String customerPassword = scanner.next();
-                if (isUser(customerAccount,customerPassword,customer)){
+                if (isUser(customerAccount, customerPassword, customer)) {
                     System.out.println("what do you want to do ?");
                     System.out.println("1.add product to your cart");
                     System.out.println("2.delete product from your cart");
                     System.out.println("3.display all the product in your cart");
-                    int customerOption=scanner.nextInt();
-                    switch (customerOption){
+                    int customerOption = scanner.nextInt();
+                    switch (customerOption) {
                         case 1:
-                            System.out.println("what product you want to add to your cart?");
-                            list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
+                            list = productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");//đọc từ file admin để hiển thị cho khách xem hàng
                             customer.display(list);
+                            System.out.println("enter product id which you want to add to you cart");
+                            String id = scanner.next();                                                                   //cho khách chọn hàng theo id
+                            ArrayList<Product> products = new ArrayList<>();                                            //khởi tạo list mới để đọc giỏ hàng
+
+                            if (products.size()==0){
+                                System.out.println("empty cart! add product please.");
+                            }else {
+                                products = productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
+                            }
+                            customer.add(customer.findProduct(id, list), products);                                        //thêm sản phầm khách hàng tìm được vào list  vừa khởi tạo
+                            productFile.writeIntoFile(products, "D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
+                            run();
                             break;
                         case 2:
-                            list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
+                            list = productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
                             System.out.println("enter product code ");
                             String codeDelete = scanner.next();
-                            customer.delete(codeDelete,list);
-                            productFile.writeIntoFile(list,"D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
+                            customer.delete(codeDelete, list);
+                            productFile.writeIntoFile(list, "D:\\codegym\\modul2\\caseStudy\\project\\fileUser");
                             run();
                             break;
                         case 3:
-                            list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser"); //ok
+                            list = productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileUser"); //ok
+                            if (list.size()==0){
+                                System.out.println("empty cart! add product please.");
+                                break;
+                            }
                             customer.display(list);
                             run();
                             break;
                     }
                 }
                 break;
+            case 3:
+                break;
+            case 4:
+                System.exit(0);
         }
     }
-
     private boolean isUser(String account, String password, User user) {
         return account.equals(user.account) && password.equals(user.password);
     }
-
-
 }

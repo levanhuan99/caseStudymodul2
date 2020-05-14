@@ -13,13 +13,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Service service = new Service();
         service.run();
-//        ProductFile productFile=new ProductFile();
-//        ArrayList<Product> list=new ArrayList<>();
-//        list=productFile.readFile("D:\\codegym\\modul2\\caseStudy\\project\\fileAdmin");
-//        User user=new User();
-//        user.display(list);
-
-
 
     }
 }

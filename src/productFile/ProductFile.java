@@ -8,11 +8,15 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ProductFile {
-    private  ProductTypeChecking productTypeChecking=new ProductTypeChecking();
+    private ProductTypeChecking productTypeChecking = new ProductTypeChecking();
 
 
     public ArrayList<Product> readFile(String path) {
-        ArrayList<Product> store=new ArrayList<>();
+
+        ArrayList<Product> store = new ArrayList<>();
+//        if (checkFileNull(store,path)){
+//            return store;
+//        }
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         Object obj = null;
@@ -51,4 +55,15 @@ public class ProductFile {
             oos.close();
         }
     }
+
+    private static boolean checkFileNull(ArrayList<Product> list, String path) {
+        list = new ArrayList<>();
+        File file=new File(path);
+        if (file.length()==0){
+            return false;
+        }
+        else return true;
+
+    }
+
 }
