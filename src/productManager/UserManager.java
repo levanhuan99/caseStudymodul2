@@ -14,31 +14,30 @@ import java.util.*;
 public class UserManager implements ProductManager, Editor {
     public String account;
     public String password;
-    private int privilege;
+    public int privilege;
 
     private ProductFile productFile;
     private ProductTypeChecking productTypeChecking = new ProductTypeChecking();
-    private SignIn signIn=new SignIn();
+
     private AccountManager accountManager = new AccountManager();
 
+    public UserManager(){}
     public UserManager(int privilege) {
         productFile = new ProductFile();
 
         this.privilege = privilege;
-        if (privilege == 1) {
+        if (privilege == 0) {
             account = "vanhuan";
             password = "12345";
-
-        } else {
-            HashMap<String, String> accountAndPassword = new HashMap<>();
-            accountAndPassword = accountManager.getInformation();
-            for (Map.Entry<String, String> s : accountAndPassword.entrySet()) {
-                if (account.equals(s.getKey()) && password.equals(s.getValue())) {              //account and password have nothing....
-                    account = s.getKey();
-                    password = s.getValue();
-                }
-            }
-
+        }  else if (privilege==1){
+            account = "lehuan";
+            password = "123";
+        }else if(privilege==2){
+            account = "456";
+            password = "456";
+        }else if (privilege==3){
+            account = "789";
+            password = "789";
         }
     }
 
