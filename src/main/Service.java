@@ -112,19 +112,14 @@ public class Service implements AdminCreation, Customer1Creation {
                             System.out.println("enter product id which you want to add to you cart");
                             String id = scanner.next();                                                                   //cho khách chọn hàng theo id
                             ArrayList<Product> products = new ArrayList<>();                                            //khởi tạo list mới để đọc giỏ hàng
-
-                            if (products.size() == 0) {
-                                System.out.println("empty cart! add product please.");
-                            } else {
-                                products = productFile.readFile(fileCustomer);
-                            }
+                            products = productFile.readFile(fileCustomer);
                             customer.add(customer.findProduct(id, list), products);                                        //thêm sản phầm khách hàng tìm được vào list  vừa khởi tạo
                             productFile.writeIntoFile(products, fileCustomer);
                             run();
                             break;
                         case 2:
                             list = productFile.readFile(fileCustomer);
-                            if (list.size()==0){
+                            if (list.size() == 0) {
                                 System.out.println("empty cart!");
                                 run();
                             }
