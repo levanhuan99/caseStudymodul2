@@ -1,13 +1,10 @@
 package productManager;
 
-import SignIn.SignIn;
-import accountManager.AccountManager;
 import product.Product;
 import product.productList.AirConditioner;
 import product.productList.TV;
 import productFile.ProductFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -19,25 +16,29 @@ public class UserManager implements ProductManager, Editor {
     private ProductFile productFile;
     private ProductTypeChecking productTypeChecking = new ProductTypeChecking();
 
-    private AccountManager accountManager = new AccountManager();
 
-    public UserManager(){}
+
     public UserManager(int privilege) {
         productFile = new ProductFile();
 
         this.privilege = privilege;
-        if (privilege == 0) {
-            account = "vanhuan";
-            password = "12345";
-        }  else if (privilege==1){
-            account = "lehuan";
-            password = "123";
-        }else if(privilege==2){
-            account = "456";
-            password = "456";
-        }else if (privilege==3){
-            account = "789";
-            password = "789";
+        switch (privilege){
+            case 0:
+                account = "vanhuan";
+                password = "12345";
+                break;
+            case 1:
+                account = "lehuan1";
+                password = "123";
+                break;
+            case 2:
+                account = "lehuan2";
+                password = "1234";
+                break;
+            case 3:
+                account = "lehuan3";
+                password = "12345";
+                break;
         }
     }
 

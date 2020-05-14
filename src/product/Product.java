@@ -39,6 +39,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString(){
-        return "name"+ getName()+",price "+getPrice()+",id "+getProductCode();
+        return "name: "+ getName()+",price: "+getPrice()+",id: "+getProductCode();
     }
 }
