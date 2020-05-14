@@ -1,4 +1,4 @@
-package main;
+package accountManager;
 
 import productManager.UserManager;
 
@@ -12,6 +12,7 @@ public class CustomerCreation {
         String customerAccount = scanner.next();
         System.out.println("enter password");
         String customerPassword = scanner.next();
+
         if(customerAccount.equals("lehuan1")&&customerPassword.equals("123")){
             customer=new UserManager(1);
             return customer;

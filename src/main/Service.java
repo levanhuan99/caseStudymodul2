@@ -1,5 +1,6 @@
 package main;
 
+import accountManager.CustomerCreation;
 import product.Product;
 import product.productList.AirConditioner;
 import product.productList.TV;
@@ -61,6 +62,7 @@ public class Service implements AdminCreation {
         System.out.println("1.add product to your cart");
         System.out.println("2.delete product from your cart");
         System.out.println("3.display all the product in your cart");
+        System.out.println("4.exit");
         int customerOption = scanner.nextInt();
         switch (customerOption) {
             case 1:
@@ -96,6 +98,8 @@ public class Service implements AdminCreation {
                 customerCreation.customer.display(list);
                 customerChoice();
                 break;
+            case 4:
+                System.exit(0);
         }
     }
 
