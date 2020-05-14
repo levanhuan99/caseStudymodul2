@@ -5,7 +5,7 @@ import product.Product;
 import product.productList.AirConditioner;
 import product.productList.TV;
 import productFile.ProductFile;
-import productManager.User;
+import productManager.UserManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,13 +26,13 @@ public class Service implements AdminCreation, Customer1Creation {
         System.out.println("3.sign up an account");
         System.out.println("4.exit");
         int userOption = scanner.nextInt();
+        SignIn signIn = new SignIn(scanner).invoke();
         switch (userOption) {
 
             case 1://admin
                 list = productFile.readFile(fileAdmin);
-                SignIn signIn = new SignIn(scanner).invoke();
-                String adminAccount = signIn.getAdminAccount();
-                String adminPassword = signIn.getAdminPassword();
+                String adminAccount = signIn.getAccount();
+                String adminPassword = signIn.getPassword();
 
                 if (isUser(adminAccount, adminPassword, admin)) {
                     System.out.println("what do you want to do ?");
@@ -95,10 +95,9 @@ public class Service implements AdminCreation, Customer1Creation {
                     }
                 }
             case 2://customer sign in
-                System.out.println("enter account");
-                String customerAccount = scanner.next();
-                System.out.println("enter password");
-                String customerPassword = scanner.next();
+
+                String customerAccount = signIn.getAccount();
+                String customerPassword = signIn.getPassword();
                 if (isUser(customerAccount, customerPassword, customer)) {
                     System.out.println("what do you want to do ?");
                     System.out.println("1.add product to your cart");
@@ -151,8 +150,8 @@ public class Service implements AdminCreation, Customer1Creation {
         }
     }
 
-    private boolean isUser(String account, String password, User user) {
-        return account.equals(user.account) && password.equals(user.password);
+    private boolean isUser(String account, String password, UserManager userManager) {
+        return account.equals(userManager.account) && password.equals(userManager.password);
     }
 
     private class EnterNameAndPriceAndCode {
@@ -187,6 +186,4 @@ public class Service implements AdminCreation, Customer1Creation {
             return this;
         }
     }
-
-
 }

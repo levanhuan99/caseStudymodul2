@@ -9,8 +9,8 @@ public class AccountManager {
 
     public  HashMap<String,String> getInformation(){
         HashMap<String,String> account=new HashMap<>();
-        account.put("vanson","vanson");
-        account.put("lehuan","lehuan");
+        account.put("vanson","12345");
+        account.put("lehuan","12345");
         return account;
     }
 

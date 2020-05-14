@@ -1,7 +1,7 @@
 package main;
 
-import productManager.User;
+import productManager.UserManager;
 
 public interface Customer1Creation {
-     User customer=new User(0);
+     UserManager customer=new UserManager(0);
 }

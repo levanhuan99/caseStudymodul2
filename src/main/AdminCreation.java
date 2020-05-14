@@ -1,7 +1,7 @@
 package main;
 
-import productManager.User;
+import productManager.UserManager;
 
 public interface AdminCreation {
-     User admin = new User(1);
+     UserManager admin = new UserManager(1);
 }

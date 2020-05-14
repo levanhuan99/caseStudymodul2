@@ -4,26 +4,26 @@ import java.util.Scanner;
 
 public class SignIn {
     private Scanner scanner;
-    private String adminAccount;
-    private String adminPassword;
+    private String account;
+    private String password;
 
+    public SignIn(){}
     public SignIn(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    public String getAdminAccount() {
-        return adminAccount;
+    public String getAccount() {
+        return account;
     }
 
-    public String getAdminPassword() {
-        return adminPassword;
+    public String getPassword() {
+        return password;
     }
-
     public SignIn invoke() {
         System.out.println("enter account");
-        adminAccount = scanner.next();
+        account = scanner.next();
         System.out.println("enter password");
-        adminPassword = scanner.next();
+        password = scanner.next();
         return this;
     }
 }
