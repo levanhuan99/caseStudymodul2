@@ -14,9 +14,9 @@ public class ProductFile {
     public ArrayList<Product> readFile(String path) {
 
         ArrayList<Product> store = new ArrayList<>();
-//        if (checkFileNull(store,path)){
-//            return store;
-//        }
+        if (checkFileNull(store,path)){
+            return store;
+        }
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         Object obj = null;
@@ -60,9 +60,9 @@ public class ProductFile {
         list = new ArrayList<>();
         File file=new File(path);
         if (file.length()==0){
-            return false;
+            return true;
         }
-        else return true;
+        else return false;
 
     }
 
