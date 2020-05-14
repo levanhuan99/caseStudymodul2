@@ -1,5 +1,6 @@
 package main;
 
+import SignIn.SignIn;
 import product.Product;
 import product.productList.AirConditioner;
 import product.productList.TV;
@@ -29,10 +30,9 @@ public class Service implements AdminCreation, Customer1Creation {
 
             case 1://admin
                 list = productFile.readFile(fileAdmin);
-                System.out.println("enter account");
-                String adminAccount = scanner.next();
-                System.out.println("enter password");
-                String adminPassword = scanner.next();
+                SignIn signIn = new SignIn(scanner).invoke();
+                String adminAccount = signIn.getAdminAccount();
+                String adminPassword = signIn.getAdminPassword();
 
                 if (isUser(adminAccount, adminPassword, admin)) {
                     System.out.println("what do you want to do ?");
@@ -94,7 +94,7 @@ public class Service implements AdminCreation, Customer1Creation {
                             break;
                     }
                 }
-            case 2://customer
+            case 2://customer sign in
                 System.out.println("enter account");
                 String customerAccount = scanner.next();
                 System.out.println("enter password");
@@ -142,6 +142,9 @@ public class Service implements AdminCreation, Customer1Creation {
                 }
                 break;
             case 3:
+                //String newAccount = new SignIn(scanner).invoke();
+
+
                 break;
             case 4:
                 System.exit(0);
@@ -184,4 +187,6 @@ public class Service implements AdminCreation, Customer1Creation {
             return this;
         }
     }
+
+
 }

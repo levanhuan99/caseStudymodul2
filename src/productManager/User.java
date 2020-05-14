@@ -8,10 +8,7 @@ import productFile.ProductFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class User implements ProductManager, Editor {
     public String account;
@@ -21,8 +18,8 @@ public class User implements ProductManager, Editor {
     private ProductFile productFile;
     private ProductTypeChecking productTypeChecking = new ProductTypeChecking();
 
-//    private AccountManager accountManager=new AccountManager();                 //thêm để lấy tài khoản mật khẩu
-//    private HashMap<String,String> accountAndPassword=new HashMap<>();          //hứng giá trị trả về của hàm getInformation,có thể sử dụng singleton để chỉ khởi tạo cái hashMap này 1 lần;
+    private AccountManager accountManager = new AccountManager();                 //thêm để lấy tài khoản mật khẩu
+         //hứng giá trị trả về của hàm getInformation,có thể sử dụng singleton để chỉ khởi tạo cái hashMap này 1 lần;
 
     public User() {
 
@@ -30,22 +27,22 @@ public class User implements ProductManager, Editor {
 
     public User(int privilege) {
         productFile = new ProductFile();
-//        accountAndPassword=accountManager.getInformation();
+
         this.privilege = privilege;
         if (privilege == 1) {
             account = "vanhuan";
-            password = "vanhuan";
+            password = "12345";
 
         } else {
-            account = "lehuan";
-            password = "lehuan";
-//            Set<String> set=accountAndPassword.keySet();
-//            for (String key:set){
-//                if (account.equals(key)&&password.equals(accountAndPassword.get(key))){
-//                    account=key;
-//                    password=accountAndPassword.get(key);
-//                }
-//            }
+            HashMap<String, String> accountAndPassword = new HashMap<>();
+            accountAndPassword = accountManager.getInformation();
+            for (Map.Entry<String, String> s : accountAndPassword.entrySet()) {
+                if (account.equals(s.getKey()) && password.equals(s.getValue())) {              //account and password have nothing....
+                    account = s.getKey();
+                    password = s.getValue();
+                }
+            }
+
         }
     }
 
@@ -121,9 +118,10 @@ public class User implements ProductManager, Editor {
 
         }
     }
-    public Product findProduct(String id,ArrayList<Product> list){
-        for (int i=0;i<list.size();i++){
-            if (list.get(i).getProductCode().equals(id)){
+
+    public Product findProduct(String id, ArrayList<Product> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getProductCode().equals(id)) {
                 return list.get(i);
             }
         }
