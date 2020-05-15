@@ -14,6 +14,7 @@ public class UserManager implements ProductManager, Editor {
 
     private ProductFile productFile;
     private ProductTypeChecking productTypeChecking = new ProductTypeChecking();
+    public UserManager(){}
 
     public UserManager(int privilege) {
         productFile = new ProductFile();
@@ -85,7 +86,7 @@ public class UserManager implements ProductManager, Editor {
     }
 
     @Override
-    public void add(Product newProduct, ArrayList<Product> list) {
+    public  void add(Product newProduct, ArrayList<Product> list) {
         list.add(newProduct);
     }
 

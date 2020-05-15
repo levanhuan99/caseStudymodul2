@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class CustomerCreation {
     public UserManager customer;
+    public AccountManager accountManager=new AccountManager();
 
     public UserManager getPrivilege(){
 
@@ -28,5 +29,4 @@ public class CustomerCreation {
         }
         return null;
     }
-
 }

@@ -104,7 +104,6 @@ public class Service implements AdminCreation {
                 System.exit(0);
         }
     }
-
     private void adminChoice() throws IOException {
         System.out.println("------------------------");
         System.out.println("what do you want to do ?");
