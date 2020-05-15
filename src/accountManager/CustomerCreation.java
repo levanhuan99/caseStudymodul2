@@ -6,9 +6,12 @@ import java.util.Scanner;
 
 public class CustomerCreation {
     public UserManager customer;
+
     public UserManager getPrivilege(){
+
         Scanner scanner=new Scanner(System.in);
-        System.out.println("enter account");
+        System.out.println("welcom sir!");
+        System.out.println("enter account please.");
         String customerAccount = scanner.next();
         System.out.println("enter password");
         String customerPassword = scanner.next();

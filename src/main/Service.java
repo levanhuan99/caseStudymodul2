@@ -25,29 +25,30 @@ public class Service implements AdminCreation {
 
     public void run() throws IOException {
 
-
+        System.out.println("welcome to the blue machine.");
         System.out.println("who are you?");
         System.out.println("1.admin");
         System.out.println("2.customer");
-        System.out.println("3.sign up an account");
-        System.out.println("4.exit");
+        System.out.println("3.exit");
         int userOption = scanner.nextInt();
         switch (userOption) {
 
             case 1://admin
                 list = productFile.readFile(fileAdmin);
-                System.out.println("enter account");
+                System.out.println("welcome sir!");
+                System.out.println("enter account please!");
                 String adminAccount = scanner.next();
-                System.out.println("enter password");
+                System.out.println("enter password please!");
                 String adminPassword = scanner.next();
                 if (isUser(adminAccount, adminPassword, admin)) {
+                    System.out.println("welcome "+adminAccount);
                     adminChoice();
                     run();
                     break;
                 }
             case 2://customer sign in
-                customerCreation.getPrivilege();
-                fileTail = Integer.toString(customerCreation.getPrivilege().privilege);
+//                customerCreation.getPrivilege();
+                fileTail = Integer.toString(customerCreation.getPrivilege().privilege);//mục đích để tạo đuôi file và nhận biết user
                 fileCustomer = "D:\\codegym\\modul2\\caseStudy\\project\\fileUser" + fileTail;
                 customerChoice();
                 run();
@@ -59,20 +60,20 @@ public class Service implements AdminCreation {
 
     private void customerChoice() throws IOException {
         System.out.println("what do you want to do ?");
-        System.out.println("1.add product to your cart");
-        System.out.println("2.delete product from your cart");
-        System.out.println("3.display all the product in your cart");
+        System.out.println("1.add product to your shopping cart");
+        System.out.println("2.delete product from your shopping cart");
+        System.out.println("3.display all the product in your shopping cart");
         System.out.println("4.exit");
         int customerOption = scanner.nextInt();
         switch (customerOption) {
             case 1:
                 list = productFile.readFile(fileAdmin);//đọc từ file admin để hiển thị cho khách xem hàng
                 customerCreation.customer.display(list);
-                System.out.println("enter product id which you want to add to you cart");
+                System.out.println("enter product id which you want to add to you shopping cart");
                 String id = scanner.next();                                                                   //cho khách chọn hàng theo id
                 ArrayList<Product> products = new ArrayList<>();                                            //khởi tạo list mới để đọc giỏ hàng
                 products = productFile.readFile(fileCustomer);
-                customerCreation.customer.add(customerCreation.customer.findProduct(id, list), products);                                        //thêm sản phầm khách hàng tìm được vào list  vừa khởi tạo
+                customerCreation.customer.add(customerCreation.customer.findProduct(id, list), products);     //thêm sản phầm khách hàng tìm được vào list  vừa khởi tạo
                 productFile.writeIntoFile(products, fileCustomer);
                 customerChoice();
                 break;
@@ -80,7 +81,7 @@ public class Service implements AdminCreation {
             case 2:
                 list = productFile.readFile(fileCustomer);
                 if (list.size() == 0) {
-                    System.out.println("empty cart!");
+                    System.out.println("empty shopping cart!");
                     customerChoice();
                 }
                 System.out.println("enter product code ");
@@ -95,6 +96,7 @@ public class Service implements AdminCreation {
                     System.out.println("empty cart! add product please.");
                     customerChoice();
                 }
+                System.out.println("your cart is having products below.");
                 customerCreation.customer.display(list);
                 customerChoice();
                 break;
@@ -104,6 +106,7 @@ public class Service implements AdminCreation {
     }
 
     private void adminChoice() throws IOException {
+        System.out.println("------------------------");
         System.out.println("what do you want to do ?");
         System.out.println("1.add product");
         System.out.println("2.delete product");
@@ -149,21 +152,21 @@ public class Service implements AdminCreation {
                         break;
                 }
             case 2:
-                System.out.println("enter product code ");      //ok
+                System.out.println("enter product code ");
                 String codeDelete = scanner.next();
                 admin.delete(codeDelete, list);
                 productFile.writeIntoFile(list, fileAdmin);
                 adminChoice();
                 break;
             case 3:
-                System.out.println("enter product code");       //ok
+                System.out.println("enter product code");
                 String codeEdit = scanner.next();
                 admin.edit(codeEdit, list);
                 productFile.writeIntoFile(list, fileAdmin);
                 adminChoice();
                 break;
             case 4:
-                admin.display(list);                            //ok
+                admin.display(list);
                 adminChoice();
                 break;
             case 5:

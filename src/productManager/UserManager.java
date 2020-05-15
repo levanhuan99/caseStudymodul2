@@ -1,5 +1,4 @@
 package productManager;
-
 import product.Product;
 import product.productList.AirConditioner;
 import product.productList.TV;
@@ -15,8 +14,6 @@ public class UserManager implements ProductManager, Editor {
 
     private ProductFile productFile;
     private ProductTypeChecking productTypeChecking = new ProductTypeChecking();
-
-
 
     public UserManager(int privilege) {
         productFile = new ProductFile();
